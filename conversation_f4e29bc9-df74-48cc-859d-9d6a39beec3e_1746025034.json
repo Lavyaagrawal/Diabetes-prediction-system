@@ -1,0 +1,24 @@
+[
+  {
+    "role": "user",
+    "content": "What are the symptoms of diabetes?",
+    "timestamp": "2025-04-30T20:27:14.037081"
+  },
+  {
+    "role": "assistant",
+    "content": "Diabetes is a chronic health condition that affects how your body turns food into energy. Most of the food you eat is broken down into sugar (glucose) and released into your bloodstream. When your blood sugar goes up, it signals your pancreas to release insulin.",
+    "source": "fallback",
+    "timestamp": "2025-04-30T20:27:16.715838"
+  },
+  {
+    "role": "user",
+    "content": "What is type 2 diabetes?",
+    "timestamp": "2025-04-30T20:27:16.723265"
+  },
+  {
+    "role": "assistant",
+    "content": "Diabetes is a chronic health condition that affects how your body turns food into energy. Most of the food you eat is broken down into sugar (glucose) and released into your bloodstream. When your blood sugar goes up, it signals your pancreas to release insulin.",
+    "source": "fallback",
+    "timestamp": "2025-04-30T20:27:19.445427"
+  }
+]
