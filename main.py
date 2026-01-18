@@ -930,11 +930,15 @@ class SymptomAssessmentScreen(Screen):
 
 class DiabetesApp(MDApp):
     current_user = None
+    logo_path = StringProperty('')
 
     def build(self):
         self.theme_cls.primary_palette = "Teal"
         self.theme_cls.accent_palette = "BlueGray"
         self.theme_cls.theme_style = "Light"
+
+        # Set logo path using resource_path
+        self.logo_path = resource_path('logo.png')
 
         # Load KV file with proper resource path
         kv_file = resource_path('diabetes_app.kv')
@@ -949,7 +953,44 @@ class DiabetesApp(MDApp):
         sm.add_widget(ChatbotScreen(name='chatbot'))
         sm.add_widget(SymptomAssessmentScreen(name='symptom_assessment'))
 
+        # Fix logo paths in all screens after building
+        Clock.schedule_once(self._fix_logo_paths, 0.1)
+
         return sm
+
+    def _fix_logo_paths(self, dt):
+        """Fix logo paths in all Image widgets"""
+        logo_path = self.logo_path
+        
+        # Verify the path exists, if not try alternatives
+        if not os.path.exists(logo_path):
+            # Try relative path from executable
+            if getattr(sys, 'frozen', False):
+                exe_dir = os.path.dirname(sys.executable)
+                alt_path = os.path.join(exe_dir, 'logo.png')
+                if os.path.exists(alt_path):
+                    logo_path = alt_path
+            else:
+                # Try relative to script
+                alt_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logo.png')
+                if os.path.exists(alt_path):
+                    logo_path = alt_path
+        
+        # Update logo in all screens
+        for screen_name in ['welcome', 'login']:
+            try:
+                screen = self.root.get_screen(screen_name)
+                if screen:
+                    for widget in screen.walk():
+                        if hasattr(widget, 'source'):
+                            # Check if it's a logo image
+                            current_source = str(widget.source).lower()
+                            if 'logo' in current_source or current_source.endswith('.png'):
+                                # Try to update if it's the logo
+                                if 'logo' in current_source or widget.source == './logo.png':
+                                    widget.source = logo_path
+            except Exception as e:
+                print(f"Error fixing logo in {screen_name}: {e}")
 
 
 if __name__ == '__main__':
