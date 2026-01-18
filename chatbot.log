@@ -1,0 +1,5 @@
+2025-04-30 20:27:14,037 - n8n_chatbot - INFO - N8N AI Agent initialized with session ID: f4e29bc9-df74-48cc-859d-9d6a39beec3e
+2025-04-30 20:27:14,037 - n8n_chatbot - INFO - Received message: What are the symptoms of diabetes?
+2025-04-30 20:27:16,715 - n8n_chatbot - ERROR - Failed to get response from n8n: HTTPSConnectionPool(host='your-n8n-domain', port=443): Max retries exceeded with url: /webhook/ai-chat (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000020404034FB0>: Failed to resolve 'your-n8n-domain' ([Errno 11001] getaddrinfo failed)"))
+2025-04-30 20:27:16,723 - n8n_chatbot - INFO - Received message: What is type 2 diabetes?
+2025-04-30 20:27:19,424 - n8n_chatbot - ERROR - Failed to get response from n8n: HTTPSConnectionPool(host='invalid-url', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000020404035A60>: Failed to resolve 'invalid-url' ([Errno 11001] getaddrinfo failed)"))
