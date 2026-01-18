@@ -1,0 +1,345 @@
+#:kivy 2.0.0
+
+<LoginScreen>:
+    email: email
+    password: password
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: dp(0)
+        spacing: dp(0)
+        md_bg_color: 0.98, 0.96, 0.94, 1  # subtle warm background
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(60)
+        Widget:
+            size_hint_y: 0.2
+        MDCard:
+            size_hint: None, None
+            size: dp(340), dp(540)
+            pos_hint: {'center_x': 0.5}
+            elevation: 8
+            radius: [20, 20, 20, 20]
+            md_bg_color: 1, 1, 1, 1
+            padding: dp(0), dp(0), dp(0), dp(0)
+            BoxLayout:
+                orientation: 'vertical'
+                padding: dp(24)
+                spacing: dp(0)
+                # Tabs
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: dp(40)
+                    spacing: dp(0)
+                    MDLabel:
+                        text: 'Login'
+                        font_style: 'Subtitle1'
+                        bold: True
+                        theme_text_color: 'Custom'
+                        text_color: 1, 0.4, 0, 1
+                        halign: 'center'
+                        canvas.after:
+                            Color:
+                                rgba: 1, 0.4, 0, 1 if root.is_active else 0,0,0,0
+                            Rectangle:
+                                size: self.width, dp(2)
+                                pos: self.x, self.y
+                    MDLabel:
+                        text: 'Sign Up'
+                        font_style: 'Subtitle1'
+                        theme_text_color: 'Custom'
+                        text_color: 0.5, 0.5, 0.5, 1
+                        halign: 'center'
+                        on_touch_down: root.manager.transition.direction = 'left'; root.manager.current = 'signup' if self.collide_point(*args[1].pos) else None
+                        canvas.after:
+                            Color:
+                                rgba: 1, 0.4, 0, 1 if not root.is_active else 0,0,0,0
+                            Rectangle:
+                                size: self.width, dp(2)
+                                pos: self.x, self.y
+                Widget:
+                    size_hint_y: None
+                    height: dp(8)
+                MDLabel:
+                    text: 'Sign In to Your Account'
+                    font_style: 'H6'
+                    bold: True
+                    halign: 'center'
+                    theme_text_color: 'Custom'
+                    text_color: 0.13, 0.13, 0.13, 1
+                    size_hint_y: None
+                    height: dp(36)
+                Widget:
+                    size_hint_y: None
+                    height: dp(8)
+                MDLabel:
+                    text: 'Email Address'
+                    font_style: 'Caption'
+                    theme_text_color: 'Custom'
+                    text_color: 0.2, 0.2, 0.2, 1
+                    size_hint_y: None
+                    height: dp(18)
+                MDTextField:
+                    id: email
+                    hint_text: 'Enter your email'
+                    mode: 'rectangle'
+                    size_hint_x: 1
+                    required: True
+                    radius: [12, 12, 12, 12]
+                    icon_right: 'email'
+                    pos_hint: {'center_x': 0.5}
+                    fill_color: 0.98, 0.98, 0.98, 1
+                    line_color_normal: 0.9, 0.9, 0.9, 1
+                    line_color_focus: 1, 0.4, 0, 1
+                Widget:
+                    size_hint_y: None
+                    height: dp(8)
+                MDLabel:
+                    text: 'Password'
+                    font_style: 'Caption'
+                    theme_text_color: 'Custom'
+                    text_color: 0.2, 0.2, 0.2, 1
+                    size_hint_y: None
+                    height: dp(18)
+                MDTextField:
+                    id: password
+                    hint_text: 'Enter your password'
+                    mode: 'rectangle'
+                    size_hint_x: 1
+                    required: True
+                    radius: [12, 12, 12, 12]
+                    icon_right: 'eye-off'
+                    password: True
+                    pos_hint: {'center_x': 0.5}
+                    fill_color: 0.98, 0.98, 0.98, 1
+                    line_color_normal: 0.9, 0.9, 0.9, 1
+                    line_color_focus: 1, 0.4, 0, 1
+                Widget:
+                    size_hint_y: None
+                    height: dp(8)
+                MDFillRoundFlatButton:
+                    text: 'Sign In'
+                    size_hint_x: 1
+                    height: dp(44)
+                    font_size: '16sp'
+                    md_bg_color: 1, 0.4, 0, 1
+                    on_release: root.validate_user()
+                Widget:
+                    size_hint_y: None
+                    height: dp(8)
+                MDSeparator:
+                    height: dp(1)
+                MDLabel:
+                    text: 'or sign in with'
+                    halign: 'center'
+                    theme_text_color: 'Hint'
+                    font_style: 'Caption'
+                    size_hint_y: None
+                    height: dp(24)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    spacing: dp(8)
+                    size_hint_y: None
+                    height: dp(96)
+                    MDFillRoundFlatButton:
+                        text: '  Continue with Google'
+                        icon: 'google'
+                        md_bg_color: 1, 1, 1, 1
+                        text_color: 0.8, 0.2, 0.2, 1
+                        line_color: 0.9, 0.9, 0.9, 1
+                        on_release: root.google_signin()
+                    MDFillRoundFlatButton:
+                        text: '  Continue with Facebook'
+                        icon: 'facebook'
+                        md_bg_color: 1, 1, 1, 1
+                        text_color: 0.23, 0.35, 0.60, 1
+                        line_color: 0.9, 0.9, 0.9, 1
+                        on_release: root.facebook_signin()
+                Widget:
+                    size_hint_y: None
+                    height: dp(8)
+                MDBoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: dp(32)
+                    spacing: dp(5)
+                    pos_hint: {'center_x': 0.5}
+                    MDLabel:
+                        text: "Don't have an account?"
+                        theme_text_color: 'Hint'
+                        font_style: 'Caption'
+                        halign: 'right'
+                    MDTextButton:
+                        text: 'Sign Up'
+                        theme_text_color: 'Custom'
+                        text_color: 1, 0.4, 0, 1
+                        font_style: 'Caption'
+                        on_release: root.manager.transition.direction = 'left'; root.manager.current = 'signup'
+        Widget:
+            size_hint_y: 0.2
+
+<SignupScreen>:
+    fullname: fullname
+    email: email
+    password: password
+    confirm_password: confirm_password
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(20)
+        spacing: dp(10)
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # Top bar with back arrow
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(60)
+            padding: [0, dp(10), 0, 0]
+            MDIconButton:
+                icon: "arrow-left"
+                on_release: root.manager.transition.direction = 'right'; root.manager.current = 'login'
+                theme_text_color: "Primary"
+                pos_hint: {'center_y': 0.5}
+            Widget:
+
+        # Title
+        MDLabel:
+            text: "Create an account"
+            font_style: "H5"
+            halign: "left"
+            theme_text_color: "Primary"
+            bold: True
+            size_hint_y: None
+            height: dp(40)
+            padding_x: dp(10)
+
+        # Subtitle
+        MDLabel:
+            text: "Please fill in your details to create an account."
+            font_style: "Body1"
+            halign: "left"
+            theme_text_color: "Secondary"
+            size_hint_y: None
+            height: dp(30)
+            padding_x: dp(10)
+
+        # Full Name Field
+        MDTextField:
+            id: fullname
+            hint_text: "Full Name"
+            mode: "rectangle"
+            size_hint_x: 1
+            pos_hint: {'center_x': 0.5}
+            required: True
+            radius: [20, 20, 20, 20]
+            icon_right: "account"
+
+        # Email Field
+        MDTextField:
+            id: email
+            hint_text: "Email Address"
+            mode: "rectangle"
+            size_hint_x: 1
+            pos_hint: {'center_x': 0.5}
+            required: True
+            radius: [20, 20, 20, 20]
+            icon_right: "email"
+
+        # Password Field
+        MDTextField:
+            id: password
+            hint_text: "Password"
+            mode: "rectangle"
+            size_hint_x: 1
+            pos_hint: {'center_x': 0.5}
+            required: True
+            radius: [20, 20, 20, 20]
+            icon_right: "lock"
+            password: True
+
+        # Confirm Password Field
+        MDTextField:
+            id: confirm_password
+            hint_text: "Confirm Password"
+            mode: "rectangle"
+            size_hint_x: 1
+            pos_hint: {'center_x': 0.5}
+            required: True
+            radius: [20, 20, 20, 20]
+            icon_right: "lock"
+            password: True
+
+        # Signup Button
+        MDFillRoundFlatButton:
+            text: "Sign up"
+            size_hint_x: 1
+            height: dp(48)
+            font_size: "16sp"
+            md_bg_color: app.theme_cls.primary_color
+            on_release: root.register_user()
+
+        # Login Link
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(40)
+            spacing: dp(5)
+            pos_hint: {'center_x': 0.5}
+
+            MDLabel:
+                text: "Already have an account?"
+                theme_text_color: "Secondary"
+            MDTextButton:
+                text: "Log in"
+                theme_text_color: "Primary"
+                on_release: root.manager.transition.direction = 'right'; root.manager.current = 'login'
+
+<ForgotPasswordDialog>:
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "180dp"
+    padding: [20, 0, 20, 0]
+
+    MDTextField:
+        id: email
+        hint_text: "Email"
+        helper_text: "Enter your registered email"
+        helper_text_mode: "on_focus"
+        icon_right: "email"
+        required: True
+
+    MDTextField:
+        id: security_answer
+        hint_text: "Security Answer"
+        helper_text: "Enter your security answer from registration"
+        helper_text_mode: "on_focus"
+        icon_right: "shield-account"
+        required: True
+
+<SecurityQuestionDialog>:
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "180dp"
+    padding: [20, 0, 20, 0]
+
+    MDRaisedButton:
+        id: security_question
+        text: "Select a security question"
+        size_hint_x: 1
+        on_release: root.open_questions_menu()
+
+    MDTextField:
+        id: security_answer
+        hint_text: "Security Answer"
+        helper_text: "Enter your answer to the security question"
+        helper_text_mode: "on_focus"
+        icon_right: "shield-account"
+        required: True 

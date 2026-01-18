@@ -1,0 +1,946 @@
+<WelcomeScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(25)
+        spacing: dp(20)
+        canvas.before:
+            Color:
+                rgba: 0.92, 0.97, 0.97, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # Empty space at top
+        Widget:
+            size_hint_y: 0.2
+
+        # Logo centered
+        Image:
+            source: './logo.png'
+            size_hint: None, None
+            size: dp(180), dp(180)
+            pos_hint: {'center_x': 0.5}
+            mipmap: True
+
+        # App name
+        MDLabel:
+            text: "ArogyAI"
+            halign: 'center'
+            font_style: 'H4'
+            theme_text_color: "Primary"
+            bold: True
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {'center_x': 0.5}
+
+        # Tagline
+        MDLabel:
+            text: "Your personal health intelligence companion"
+            halign: 'center'
+            theme_text_color: "Secondary"
+            font_style: 'Subtitle1'
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {'center_x': 0.5}
+
+        # Spacer
+        Widget:
+            size_hint_y: 0.2
+
+        # Get started button - initially disabled
+        MDFillRoundFlatButton:
+            id: get_started_btn
+            text: "I UNDERSTAND"
+            pos_hint: {'center_x': 0.5}
+            size_hint_x: 0.8
+            font_size: '18sp'
+            height: dp(50)
+            elevation: 10
+            disabled: True
+            on_release: root.go_to_login()
+
+        # Terms and conditions with checkbox
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(48)
+            size_hint_x: 0.9
+            pos_hint: {'center_x': 0.5}
+            spacing: dp(10)
+
+            MDCheckbox:
+                size_hint: None, None
+                size: dp(48), dp(48)
+                pos_hint: {'center_y': 0.5}
+                on_active: root.on_checkbox_active(self, self.active)
+
+            MDTextButton:
+                text: "I accept Terms & Conditions"
+                theme_text_color: "Custom"
+                text_color: app.theme_cls.primary_dark
+                on_release: root.go_to_terms()
+                pos_hint: {'center_y': 0.5}
+
+<TermsAndConditionsScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(10)
+        spacing: dp(5)
+        canvas.before:
+            Color:
+                rgba: app.theme_cls.bg_normal
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        MDTopAppBar:
+            title: "Terms and Conditions"
+            elevation: 4
+            left_action_items: [["arrow-left", lambda x: root.go_back()]]
+            md_bg_color: app.theme_cls.primary_color
+
+        ScrollView:
+            do_scroll_x: False
+            BoxLayout:
+                orientation: 'vertical'
+                padding: dp(20)
+                spacing: dp(15)
+                size_hint_y: None
+                height: self.minimum_height
+
+                MDLabel:
+                    text: "Diabetes Prediction App - Terms and Conditions"
+                    font_style: 'H6'
+                    bold: True
+                    size_hint_y: None
+                    height: dp(40)
+
+                MDLabel:
+                    text: "Last updated: April 11, 2025"
+                    theme_text_color: "Secondary"
+                    size_hint_y: None
+                    height: dp(30)
+
+                MDLabel:
+                    text: "1. Acceptance of Terms"
+                    font_style: 'Subtitle1'
+                    bold: True
+                    size_hint_y: None
+                    height: dp(30)
+
+                MDLabel:
+                    text: "By accessing or using the Diabetes Prediction App, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use the application."
+                    size_hint_y: None
+                    height: dp(80)
+
+                MDLabel:
+                    text: "2. Medical Disclaimer"
+                    font_style: 'Subtitle1'
+                    bold: True
+                    size_hint_y: None
+                    height: dp(30)
+
+                MDLabel:
+                    text: "This application is designed for informational purposes only and is not intended to replace professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition."
+                    size_hint_y: None
+                    height: dp(120)
+
+                MDLabel:
+                    text: "3. Privacy Policy"
+                    font_style: 'Subtitle1'
+                    bold: True
+                    size_hint_y: None
+                    height: dp(30)
+
+                MDLabel:
+                    text: "We collect personal information for account creation and diabetes risk assessment. Your data is stored securely and will not be shared with third parties without your consent. You can request deletion of your data at any time through the app settings."
+                    size_hint_y: None
+                    height: dp(100)
+
+                MDLabel:
+                    text: "4. User Accounts"
+                    font_style: 'Subtitle1'
+                    bold: True
+                    size_hint_y: None
+                    height: dp(30)
+
+                MDLabel:
+                    text: "You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You must immediately notify us of any unauthorized use of your account."
+                    size_hint_y: None
+                    height: dp(80)
+
+                MDLabel:
+                    text: "5. Limitation of Liability"
+                    font_style: 'Subtitle1'
+                    bold: True
+                    size_hint_y: None
+                    height: dp(30)
+
+                MDLabel:
+                    text: "The application provides an estimated risk assessment based on the information you provide. The accuracy of this assessment depends on the accuracy of your inputs. We are not liable for any decisions made based on the app's predictions."
+                    size_hint_y: None
+                    height: dp(100)
+
+                MDLabel:
+                    text: "6. Modifications to Terms"
+                    font_style: 'Subtitle1'
+                    bold: True
+                    size_hint_y: None
+                    height: dp(30)
+
+                MDLabel:
+                    text: "We reserve the right to modify these terms at any time. Your continued use of the application after such changes constitutes your acceptance of the new terms."
+                    size_hint_y: None
+                    height: dp(80)
+
+                MDLabel:
+                    text: "7. Contact Information"
+                    font_style: 'Subtitle1'
+                    bold: True
+                    size_hint_y: None
+                    height: dp(30)
+
+                MDLabel:
+                    text: "If you have any questions about these Terms and Conditions, please contact us at support@diabetesapp.com."
+                    size_hint_y: None
+                    height: dp(60)
+
+                MDFillRoundFlatButton:
+                    text: "I ACCEPT"
+                    pos_hint: {'center_x': 0.5}
+                    size_hint_x: 0.8
+                    on_release: root.go_back()
+
+<LoginScreen>:
+    email: email
+    password: password
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(20)
+        spacing: dp(15)
+        canvas.before:
+            Color:
+                rgba: app.theme_cls.bg_normal
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        MDBoxLayout:
+            adaptive_height: True
+            padding: [0, dp(10), 0, 0]
+            MDIconButton:
+                icon: "arrow-left"
+                on_release:
+                    root.manager.transition.direction = 'right'
+                    root.manager.current = 'welcome'
+                theme_text_color: "Primary"
+                pos_hint: {'center_y': 0.5}
+            Widget:
+                size_hint_x: 0.7
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(120)
+            padding: [0, dp(10)]
+            spacing: dp(10)
+            orientation: 'vertical'
+            Image:
+                source: './logo.png'
+                size_hint: None, None
+                size: dp(100), dp(100)
+                pos_hint: {'center_x': 0.5}
+                mipmap: True
+
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: dp(20)
+            padding: dp(10)
+            size_hint_y: None
+            height: self.minimum_height
+
+            MDTextField:
+                id: email
+                hint_text: "Email"
+                helper_text: "Enter your registered email"
+                helper_text_mode: "on_focus"
+                icon_right: "email"
+                size_hint_x: 0.9
+                pos_hint: {'center_x': 0.5}
+                required: True
+
+            MDTextField:
+                id: password
+                hint_text: "Password"
+                helper_text: "Enter your password"
+                helper_text_mode: "on_focus"
+                icon_right: "lock"
+                password: True
+                size_hint_x: 0.9
+                pos_hint: {'center_x': 0.5}
+                required: True
+
+            MDFillRoundFlatButton:
+                text: "LOGIN"
+                pos_hint: {'center_x': 0.5}
+                size_hint_x: 0.7
+                elevation: 8
+                on_release: root.validate_user()
+
+            MDTextButton:
+                text: "Forgot Password?"
+                pos_hint: {'center_x': 0.5}
+                theme_text_color: "Custom"
+                text_color: app.theme_cls.primary_dark
+                on_release: root.show_forgot_password_dialog()
+
+            Widget:
+                size_hint_y: None
+                height: dp(10)
+
+            MDLabel:
+                text: "Don't have an account?"
+                halign: 'center'
+                theme_text_color: "Secondary"
+                size_hint_y: None
+                height: dp(20)
+
+            MDFlatButton:
+                text: "SIGN UP"
+                pos_hint: {'center_x': 0.5}
+                on_release:
+                    root.manager.transition.direction = 'left'
+                    root.manager.current = 'signup'
+                theme_text_color: "Primary"
+
+<ForgotPasswordDialog>:
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "180dp"
+    padding: [20, 0, 20, 0]
+
+    MDTextField:
+        id: email
+        hint_text: "Email"
+        helper_text: "Enter your registered email"
+        helper_text_mode: "on_focus"
+        icon_right: "email"
+        required: True
+
+    MDTextField:
+        id: security_answer
+        hint_text: "Security Answer"
+        helper_text: "Enter your security answer from registration"
+        helper_text_mode: "on_focus"
+        icon_right: "shield-account"
+        required: True
+
+<SecurityQuestionDialog>:
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "180dp"
+    padding: [20, 0, 20, 0]
+
+    MDRaisedButton:
+        id: security_question
+        text: "Select a security question"
+        size_hint_x: 1
+        on_release: root.open_questions_menu()
+
+    MDTextField:
+        id: security_answer
+        hint_text: "Security Answer"
+        helper_text: "Enter your answer to the security question"
+        helper_text_mode: "on_focus"
+        icon_right: "shield-account"
+        required: True
+
+<SignupScreen>:
+    fullname: fullname
+    email: email
+    password: password
+    confirm_password: confirm_password
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(20)
+        spacing: dp(10)
+        canvas.before:
+            Color:
+                rgba: app.theme_cls.bg_normal
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        MDBoxLayout:
+            adaptive_height: True
+            padding: [0, dp(10), 0, 0]
+            MDIconButton:
+                icon: "arrow-left"
+                on_release: root.manager.transition.direction = 'right'; root.manager.current = 'login'
+                theme_text_color: "Primary"
+                pos_hint: {'center_y': 0.5}
+            Widget:
+                size_hint_x: 0.7
+
+        MDLabel:
+            text: "Create New Account"
+            halign: 'center'
+            font_style: 'H5'
+            theme_text_color: "Primary"
+            size_hint_y: None
+            height: dp(60)
+
+        ScrollView:
+            do_scroll_x: False
+            size_hint_y: 1
+            BoxLayout:
+                orientation: 'vertical'
+                spacing: dp(15)
+                padding: dp(10)
+                size_hint_y: None
+                height: self.minimum_height
+
+                MDTextField:
+                    id: fullname
+                    hint_text: "Full Name"
+                    helper_text: "Enter your full name"
+                    helper_text_mode: "on_focus"
+                    icon_right: "account"
+                    size_hint_x: 0.9
+                    pos_hint: {'center_x': 0.5}
+                    required: True
+                    size_hint_y: None
+                    height: dp(60)
+
+                MDTextField:
+                    id: email
+                    hint_text: "Email"
+                    helper_text: "Enter a valid email address"
+                    helper_text_mode: "on_focus"
+                    icon_right: "email"
+                    size_hint_x: 0.9
+                    pos_hint: {'center_x': 0.5}
+                    required: True
+                    size_hint_y: None
+                    height: dp(60)
+
+                MDTextField:
+                    id: password
+                    hint_text: "Password"
+                    helper_text: "Minimum 6 characters"
+                    helper_text_mode: "on_focus"
+                    icon_right: "lock"
+                    password: True
+                    size_hint_x: 0.9
+                    pos_hint: {'center_x': 0.5}
+                    required: True
+                    size_hint_y: None
+                    height: dp(60)
+
+                MDTextField:
+                    id: confirm_password
+                    hint_text: "Confirm Password"
+                    helper_text: "Re-enter your password"
+                    helper_text_mode: "on_focus"
+                    icon_right: "lock-check"
+                    password: True
+                    size_hint_x: 0.9
+                    pos_hint: {'center_x': 0.5}
+                    required: True
+                    size_hint_y: None
+                    height: dp(60)
+
+                MDFillRoundFlatButton:
+                    text: "SIGN UP"
+                    pos_hint: {'center_x': 0.5}
+                    size_hint_x: 0.7
+                    elevation: 8
+                    on_release: root.register_user()
+                    size_hint_y: None
+                    height: dp(50)
+
+                Widget:
+                    size_hint_y: None
+                    height: dp(20)
+
+<HomeScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 0
+        padding: 0
+        canvas.before:
+            Color:
+                rgba: 0.95, 0.98, 0.98, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        MDBoxLayout:
+            adaptive_height: True
+            md_bg_color: app.theme_cls.primary_color
+            padding: "20dp", "16dp"
+            spacing: "12dp"
+            size_hint_y: None
+            height: "76dp"
+            MDBoxLayout:
+                orientation: 'vertical'
+                adaptive_height: True
+                spacing: "4dp"
+                size_hint_x: 0.7
+                MDLabel:
+                    id: welcome_label
+                    text: "Hi there!"
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 1, 1
+                    font_style: "H6"
+                    bold: True
+                    size_hint_y: None
+                    height: "28dp"
+                MDLabel:
+                    text: "Let's check your health"
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 1, 0.8
+                    font_style: "Caption"
+                    size_hint_y: None
+                    height: "20dp"
+            Widget:
+                size_hint_x: 0.1
+            MDIconButton:
+                icon: "bell"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                on_release: root.open_reminders()
+                size_hint: None, None
+                size: "48dp", "48dp"
+                pos_hint: {"center_y": .5}
+            MDIconButton:
+                icon: "logout"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                on_release: root.logout()
+                size_hint: None, None
+                size: "48dp", "48dp"
+                pos_hint: {"center_y": .5}
+
+        ScrollView:
+            do_scroll_x: False
+            bar_width: "4dp"
+            bar_color: app.theme_cls.primary_color
+            bar_inactive_color: app.theme_cls.primary_light
+            effect_cls: "ScrollEffect"
+            MDBoxLayout:
+                orientation: 'vertical'
+                adaptive_height: True
+                padding: "16dp"
+                spacing: "20dp"
+
+                # Symptom Assessment Button (replaces glucose card)
+                MDCard:
+                    orientation: 'vertical'
+                    padding: "24dp"
+                    size_hint_y: None
+                    height: "120dp"
+                    md_bg_color: 1, 1, 1, 1
+                    elevation: 2
+                    radius: 15
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: "80dp"
+                        Widget:
+                        MDFillRoundFlatButton:
+                            text: "START SYMPTOM ASSESSMENT"
+                            pos_hint: {'center_x': 0.5}
+                            size_hint_x: 0.9
+                            font_size: "18sp"
+                            on_release: root.start_symptom_assessment()
+                        Widget:
+
+                # Quick Actions Grid
+                MDGridLayout:
+                    cols: 2
+                    spacing: "16dp"
+                    adaptive_height: True
+                    size_hint_y: None
+                    height: "140dp"
+                    
+                    # Insights Card
+                    MDCard:
+                        orientation: 'vertical'
+                        padding: "0dp", "12dp"
+                        elevation: 1
+                        radius: 15
+                        ripple_behavior: True
+                        on_release: root.view_insights()
+                        
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            spacing: "0dp"
+                            padding: "0dp", "0dp"
+                            size_hint: 1, 1
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                            
+                            Widget:
+                                size_hint_y: 0.15
+                            MDIcon:
+                                icon: "chart-line"
+                                halign: 'center'
+                                font_size: "40sp"
+                                theme_text_color: "Custom"
+                                text_color: app.theme_cls.primary_color
+                                size_hint: None, None
+                                size: "48dp", "48dp"
+                                pos_hint: {"center_x": 0.5}
+                            Widget:
+                                size_hint_y: 0.05
+                            MDLabel:
+                                text: "Insights"
+                                halign: 'center'
+                                theme_text_color: "Secondary"
+                                font_style: "Body1"
+                                bold: True
+                                size_hint_y: None
+                                height: "28dp"
+                            Widget:
+                                size_hint_y: 0.15
+                    
+                    # Reports Card
+                    MDCard:
+                        orientation: 'vertical'
+                        padding: "0dp", "12dp"
+                        elevation: 1
+                        radius: 15
+                        ripple_behavior: True
+                        on_release: root.open_reports()
+                        
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            spacing: "0dp"
+                            padding: "0dp", "0dp"
+                            size_hint: 1, 1
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                            
+                            Widget:
+                                size_hint_y: 0.15
+                            MDIcon:
+                                icon: "file-document"
+                                halign: 'center'
+                                font_size: "40sp"
+                                theme_text_color: "Custom"
+                                text_color: app.theme_cls.primary_color
+                                size_hint: None, None
+                                size: "48dp", "48dp"
+                                pos_hint: {"center_x": 0.5}
+                            Widget:
+                                size_hint_y: 0.05
+                            MDLabel:
+                                text: "Reports"
+                                halign: 'center'
+                                theme_text_color: "Secondary"
+                                font_style: "Body1"
+                                bold: True
+                                size_hint_y: None
+                                height: "28dp"
+                            Widget:
+                                size_hint_y: 0.15
+
+                # Reminders Section
+                MDCard:
+                    orientation: 'vertical'
+                    padding: "20dp"
+                    spacing: "12dp"
+                    elevation: 1
+                    radius: 15
+                    size_hint_y: None
+                    height: "160dp"
+                    md_bg_color: 1, 1, 1, 1
+                    ripple_behavior: True
+
+                    MDBoxLayout:
+                        orientation: 'horizontal'
+                        adaptive_height: True
+                        spacing: "8dp"
+                        size_hint_y: None
+                        height: "36dp"
+                        
+                        MDLabel:
+                            text: "Reminders"
+                            theme_text_color: "Secondary"
+                            font_style: "H6"
+                            bold: True
+                        
+                        MDIconButton:
+                            icon: "plus-circle"
+                            theme_text_color: "Custom"
+                            text_color: app.theme_cls.primary_color
+                            on_release: root.open_reminders()
+                            pos_hint: {"center_y": .5}
+
+                    MDLabel:
+                        text: "No active reminders"
+                        theme_text_color: "Hint"
+                        halign: 'center'
+                        size_hint_y: None
+                        height: "80dp"
+                        font_style: "Body1"
+
+                # Health Assistant Card
+                MDCard:
+                    orientation: 'horizontal'
+                    padding: "16dp"
+                    elevation: 1
+                    radius: 15
+                    size_hint_y: None
+                    height: "100dp"
+                    md_bg_color: app.theme_cls.primary_color[:-1] + [0.1]
+                    ripple_behavior: True
+                    on_release: root.open_chatbot()
+
+                    MDIcon:
+                        icon: "robot"
+                        halign: 'center'
+                        font_size: "40sp"
+                        theme_text_color: "Custom"
+                        text_color: app.theme_cls.primary_color
+                        size_hint: None, None
+                        size: "56dp", "56dp"
+                        pos_hint: {"center_y": .5}
+
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        spacing: "4dp"
+                        padding: ["16dp", 0, 0, 0]
+                        pos_hint: {"center_y": .5}
+                        
+                        MDLabel:
+                            text: "Health Assistant"
+                            theme_text_color: "Primary"
+                            font_style: "H6"
+                            bold: True
+                            size_hint_y: None
+                            height: "28dp"
+                        
+                        MDLabel:
+                            text: "Chat with our AI assistant"
+                            theme_text_color: "Secondary"
+                            font_style: "Caption"
+                            size_hint_y: None
+                            height: "20dp"
+
+                    MDIconButton:
+                        icon: "chevron-right"
+                        theme_text_color: "Custom"
+                        text_color: app.theme_cls.primary_color
+                        size_hint: None, None
+                        size: "48dp", "48dp"
+                        pos_hint: {"center_y": .5}
+                        
+                # Bottom padding
+                Widget:
+                    size_hint_y: None
+                    height: "20dp"
+
+<ChatbotScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: 0.95, 0.98, 0.98, 1  # Light blue-gray background
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # Enhanced Top App Bar
+        MDBoxLayout:
+            adaptive_height: True
+            md_bg_color: app.theme_cls.primary_color
+            padding: "8dp"
+            spacing: "8dp"
+            elevation: 4
+            radius: [0, 0, 15, 15]  # Rounded bottom corners
+
+            MDIconButton:
+                icon: "arrow-left"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                on_release: root.go_back()
+                pos_hint: {"center_y": .5}
+
+            MDLabel:
+                text: "Diabetes Assistant"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                font_style: "H6"
+                bold: True
+                halign: "center"
+                valign: "middle"
+                pos_hint: {"center_y": .5}
+
+            MDIconButton:
+                icon: "refresh"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                on_release: root.clear_chat()
+                pos_hint: {"center_y": .5}
+
+        # Chat messages area with custom background
+        ScrollView:
+            id: chat_scroll
+            do_scroll_x: False
+            bar_width: 5
+            bar_color: app.theme_cls.primary_color
+            bar_inactive_color: app.theme_cls.primary_light
+            effect_cls: "ScrollEffect"
+            scroll_type: ['bars', 'content']
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                adaptive_height: True
+                padding: "12dp"
+                spacing: "10dp"
+
+                MDCard:
+                    orientation: 'vertical'
+                    padding: "12dp"
+                    spacing: "8dp"
+                    elevation: 1
+                    radius: 15
+                    md_bg_color: 1, 1, 1, 0.8
+                    adaptive_height: True
+
+                    MDLabel:
+                        id: chat_label
+                        text: root.chat_history
+                        markup: True
+                        adaptive_height: True
+                        padding: "10dp", "10dp"
+                        text_size: self.width, None
+
+        # Suggestion chips area
+        MDBoxLayout:
+            id: suggestion_area
+            orientation: 'vertical'
+            adaptive_height: True
+            padding: "8dp", "4dp"
+            md_bg_color: 0.9, 0.95, 0.95, 1  # Lighter blue-gray for suggestion area
+
+            MDLabel:
+                text: "Suggested Questions"
+                theme_text_color: "Secondary"
+                font_style: "Caption"
+                adaptive_height: True
+
+            ScrollView:
+                do_scroll_y: False
+                do_scroll_x: True
+                size_hint_y: None
+                height: "48dp"
+                bar_width: 0
+
+                MDBoxLayout:
+                    id: suggestion_container
+                    orientation: 'horizontal'
+                    adaptive_width: True
+                    padding: "4dp"
+                    spacing: "8dp"
+                    size_hint_x: None
+                    # Width will be set by children
+
+        # Message input area with animated shadow
+        MDCard:
+            orientation: 'horizontal'
+            padding: "8dp", "8dp"
+            spacing: "8dp"
+            elevation: 2
+            radius: [15, 15, 0, 0]  # Rounded top corners
+            md_bg_color: 1, 1, 1, 1
+            size_hint_y: None
+            height: "70dp"
+
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 0, 0.05
+                RoundedRectangle:
+                    pos: self.pos[0], self.pos[1] - 2
+                    size: self.size
+                    radius: [15, 15, 0, 0]
+
+            MDTextField:
+                id: message_input
+                hint_text: "Ask about diabetes..."
+                multiline: False
+                mode: "fill"
+                fill_color: 0.95, 0.95, 0.95, 1
+                radius: [20, 20, 20, 20]
+                size_hint_x: 0.85
+                on_text_validate: root.send_message()
+                icon_left: "message-text-outline"
+
+            MDIconButton:
+                icon: "send"
+                theme_text_color: "Custom"
+                text_color: app.theme_cls.primary_color
+                user_font_size: "24sp"
+                pos_hint: {"center_y": .5}
+                on_release: root.send_message()
+                canvas.before:
+                    Color:
+                        rgba: app.theme_cls.primary_color[0], app.theme_cls.primary_color[1], app.theme_cls.primary_color[2], 0.1
+                    Ellipse:
+                        pos: self.center_x - 24, self.center_y - 24
+                        size: 48, 48
+
+<SymptomAssessmentScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: "20dp"
+        spacing: "12dp"
+        MDTopAppBar:
+            title: "Symptom Assessment"
+            left_action_items: [["arrow-left", lambda x: root.go_home()]]
+        ScrollView:
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: "16dp"
+                MDTextField:
+                    id: pregnancies
+                    hint_text: "Pregnancies"
+                    input_filter: "int"
+                MDTextField:
+                    id: glucose
+                    hint_text: "Glucose"
+                    input_filter: "float"
+                MDTextField:
+                    id: blood_pressure
+                    hint_text: "Blood Pressure"
+                    input_filter: "float"
+                MDTextField:
+                    id: skin_thickness
+                    hint_text: "Skin Thickness"
+                    input_filter: "float"
+                MDTextField:
+                    id: insulin
+                    hint_text: "Insulin"
+                    input_filter: "float"
+                MDTextField:
+                    id: bmi
+                    hint_text: "BMI"
+                    input_filter: "float"
+                MDTextField:
+                    id: diabetes_pedigree
+                    hint_text: "Diabetes Pedigree Function"
+                    input_filter: "float"
+                MDTextField:
+                    id: age
+                    hint_text: "Age"
+                    input_filter: "int"
+                MDFillRoundFlatButton:
+                    text: "PREDICT"
+                    pos_hint: {'center_x': 0.5}
+                    size_hint_x: 0.8
+                    on_release: root.predict()
