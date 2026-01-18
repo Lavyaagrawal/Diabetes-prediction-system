@@ -25,7 +25,8 @@ wheels/
 
 # PyInstaller
 *.manifest
-*.spec
+# Keep build.spec as it's needed for building
+# *.spec
 
 # Kivy/KivyMD
 *.pyc
